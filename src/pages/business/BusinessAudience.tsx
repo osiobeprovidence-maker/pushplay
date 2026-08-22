@@ -17,7 +17,7 @@ export function BusinessAudience() {
           <h1 className="text-3xl font-bold tracking-tight mb-2">Audience Insights</h1>
           <p className="text-neutral-400 text-sm">Understand who is interacting with your brand and discover new segments.</p>
         </div>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 h-12 px-6 rounded-2xl">
+        <Button variant="brand" className="h-12 px-6 rounded-2xl" onClick={() => alert('Create Segment - demo')}>
           <UserPlus className="w-5 h-5 mr-2" />
           Create Segment
         </Button>

@@ -23,9 +23,7 @@ export function PublicLayout() {
             <Link to="/login" className="text-sm font-medium text-white hover:text-neutral-300 transition-colors hidden sm:block">
               Log in
             </Link>
-            <Link to="/signup">
-              <Button size="sm">Get Started</Button>
-            </Link>
+            <Button to="/signup" size="sm">Get Started</Button>
           </div>
         </div>
       </header>

@@ -59,7 +59,8 @@ export function BusinessCampaigns() {
           <p className="text-neutral-400 text-sm">Monitor and optimize your advertising performance across the platform.</p>
         </div>
         <Button 
-          className="bg-indigo-600 hover:bg-indigo-700 h-12 px-6 rounded-2xl"
+          variant="brand"
+          className="h-12 px-6 rounded-2xl"
           onClick={() => navigate('/business/create')}
         >
           <Plus className="w-5 h-5 mr-2" />
@@ -77,7 +78,7 @@ export function BusinessCampaigns() {
           />
         </div>
         <div className="flex gap-2">
-          <Button variant="secondary" className="h-12 border-neutral-800 bg-neutral-900 px-4">
+          <Button variant="secondary" className="h-12 border-neutral-800 bg-neutral-900 px-4" onClick={() => alert('Filters - demo')}>
             <Filter className="w-5 h-5 mr-2" />
             Filters
           </Button>
@@ -123,7 +124,7 @@ export function BusinessCampaigns() {
             </div>
 
             <div className="flex items-center gap-3 self-start md:self-center">
-              <Button variant="secondary" size="sm" className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700">
+              <Button variant="secondary" size="sm" className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700" onClick={() => alert('View Reports - demo')}>
                 View Reports
               </Button>
               <button className="p-2 hover:bg-neutral-800 rounded-xl transition-colors">

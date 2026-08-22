@@ -16,7 +16,7 @@ export function CreatorChallenges() {
           <h1 className="text-3xl font-bold tracking-tight mb-2">Fan Challenges</h1>
           <p className="text-neutral-400 text-sm">Create interactive challenges to engage your community.</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700 h-12 px-6 rounded-2xl">
+        <Button variant="brand-blue" className="h-12 px-6 rounded-2xl" onClick={() => alert('Create Challenge - demo')}>
           <Plus className="w-5 h-5 mr-2" />
           Create Challenge
         </Button>

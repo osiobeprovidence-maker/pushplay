@@ -142,7 +142,7 @@ export function CreatorCreate() {
           </Button>
           <Button 
             type="submit" 
-            className={step === 4 ? "bg-blue-600 hover:bg-blue-700 text-white" : ""}
+            variant={step === 4 ? 'brand-blue' : 'primary'}
             isLoading={isLoading}
           >
             {step === 4 ? 'Submit Campaign' : 'Continue'}

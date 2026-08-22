@@ -32,17 +32,13 @@ export function Home() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
-          <Link to="/signup">
-            <Button variant="brand" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl group">
-              Join the Ecosystem
-              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
-          <Link to="/login">
-            <Button variant="secondary" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl border-white/10 hover:bg-white/5">
-              Sign In
-            </Button>
-          </Link>
+          <Button to="/signup" variant="brand" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl group">
+            Join the Ecosystem
+            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Button>
+          <Button to="/login" variant="secondary" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl border-white/10 hover:bg-white/5">
+            Sign In
+          </Button>
         </div>
       </section>
 
@@ -190,11 +186,9 @@ export function Home() {
               <h3 className="text-2xl font-bold mb-2">Ready to scale your brand?</h3>
               <p className="text-neutral-400">Join over 500+ businesses already thriving on Push Play.</p>
             </div>
-            <Link to="/signup">
-              <Button variant="white" size="lg" className="h-14 px-10 rounded-xl">
-                Partner with Us
-              </Button>
-            </Link>
+            <Button to="/signup" variant="white" size="lg" className="h-14 px-10 rounded-xl">
+              Partner with Us
+            </Button>
           </div>
         </div>
       </section>
@@ -205,12 +199,10 @@ export function Home() {
         <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-10">
           THE PLAY IS YOURS.
         </h2>
-        <Link to="/signup">
-          <Button variant="brand" size="lg" className="h-20 px-16 text-xl rounded-full group">
-            Get Started Now
-            <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
-          </Button>
-        </Link>
+        <Button to="/signup" variant="brand" size="lg" className="h-20 px-16 text-xl rounded-full group">
+          Get Started Now
+          <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
+        </Button>
         <div className="mt-16 text-neutral-600 font-medium tracking-widest uppercase text-xs">
           Available on Web • iOS • Android
         </div>

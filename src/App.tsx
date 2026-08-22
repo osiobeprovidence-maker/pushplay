@@ -43,6 +43,12 @@ import { BusinessSettings } from './pages/business/BusinessSettings';
 
 // Admin Pages
 import { AdminDashboard } from './pages/admin/AdminDashboard';
+import { AdminUsers } from './pages/admin/AdminUsers';
+import { AdminCampaigns } from './pages/admin/AdminCampaigns';
+import { AdminRewards } from './pages/admin/AdminRewards';
+import { AdminWithdrawals } from './pages/admin/AdminWithdrawals';
+import { AdminReports } from './pages/admin/AdminReports';
+import { AdminSettings } from './pages/admin/AdminSettings';
 
 export default function App() {
   return (
@@ -101,6 +107,12 @@ export default function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="campaigns" element={<AdminCampaigns />} />
+          <Route path="rewards" element={<AdminRewards />} />
+          <Route path="withdrawals" element={<AdminWithdrawals />} />
+          <Route path="reports" element={<AdminReports />} />
+          <Route path="settings" element={<AdminSettings />} />
           <Route path="*" element={<Navigate to="dashboard" replace />} />
         </Route>
 

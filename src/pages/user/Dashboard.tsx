@@ -38,12 +38,8 @@ export function Dashboard() {
           </div>
 
           <div className="flex gap-4 mt-8">
-            <Link to="/rewards">
-              <Button>Redeem Points</Button>
-            </Link>
-            <Link to="/wallet">
-              <Button variant="secondary">History</Button>
-            </Link>
+            <Button to="/rewards">Redeem Points</Button>
+            <Button to="/wallet" variant="secondary">History</Button>
           </div>
         </div>
 

@@ -55,7 +55,7 @@ export function BusinessCreate() {
           <p className="text-xs text-neutral-500 mt-2">Hold Ctrl/Cmd to select multiple</p>
         </div>
 
-        <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700" isLoading={isLoading}>
+        <Button type="submit" variant="brand" className="w-full" isLoading={isLoading}>
           Launch Campaign
         </Button>
       </form>

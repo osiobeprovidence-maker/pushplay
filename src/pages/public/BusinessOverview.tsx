@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { BarChart3, Briefcase, Globe, Target } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 
@@ -31,9 +30,7 @@ export function BusinessOverview() {
             <h3 className="text-2xl font-bold mb-2 text-white">Ready to scale your brand?</h3>
             <p className="text-neutral-400">Join over 500+ businesses already thriving on Push Play.</p>
           </div>
-          <Link to="/signup">
-            <Button variant="brand" className="h-14 px-10 rounded-xl whitespace-nowrap">Partner with Us</Button>
-          </Link>
+          <Button to="/signup" variant="brand" className="h-14 px-10 rounded-xl whitespace-nowrap">Partner with Us</Button>
         </div>
 
         <div className="grid sm:grid-cols-3 gap-6 mb-12">
@@ -52,12 +49,8 @@ export function BusinessOverview() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Link to="/signup">
-            <Button variant="brand" className="w-full h-14 rounded-2xl text-base">Create Business Account</Button>
-          </Link>
-          <Link to="/login">
-            <Button variant="outline" className="w-full h-14 rounded-2xl text-base">Sign In</Button>
-          </Link>
+          <Button to="/signup" variant="brand" className="w-full h-14 rounded-2xl text-base">Create Business Account</Button>
+          <Button to="/login" variant="outline" className="w-full h-14 rounded-2xl text-base">Sign In</Button>
         </div>
       </section>
     </div>

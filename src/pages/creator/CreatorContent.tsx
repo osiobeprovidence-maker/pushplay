@@ -18,11 +18,11 @@ export function CreatorContent() {
           <p className="text-neutral-400 text-sm">Upload and manage your videos, music, and reels.</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" className="h-12 px-6 rounded-2xl border-neutral-800 bg-neutral-900">
+          <Button variant="secondary" className="h-12 px-6 rounded-2xl border-neutral-800 bg-neutral-900" onClick={() => alert('Upload Audio - demo: file picker would open')}>
             <Music className="w-5 h-5 mr-2" />
             Upload Audio
           </Button>
-          <Button className="bg-blue-600 hover:bg-blue-700 h-12 px-6 rounded-2xl">
+          <Button variant="brand-blue" className="h-12 px-6 rounded-2xl" onClick={() => alert('Upload Video - demo: file picker would open')}>
             <Video className="w-5 h-5 mr-2" />
             Upload Video
           </Button>

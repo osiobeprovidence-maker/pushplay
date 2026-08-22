@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Award, Heart, Radio, Sparkles, Users, Zap } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 
@@ -79,12 +78,8 @@ export function CreatorsOverview() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <Link to="/signup">
-            <Button variant="brand-blue" className="w-full h-14 rounded-2xl text-base">Start Creating</Button>
-          </Link>
-          <Link to="/login">
-            <Button variant="outline" className="w-full h-14 rounded-2xl text-base">Sign In as Creator</Button>
-          </Link>
+          <Button to="/signup" variant="brand-blue" className="w-full h-14 rounded-2xl text-base">Start Creating</Button>
+          <Button to="/login" variant="outline" className="w-full h-14 rounded-2xl text-base">Sign In as Creator</Button>
         </div>
       </section>
     </div>

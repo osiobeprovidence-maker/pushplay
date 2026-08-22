@@ -118,8 +118,8 @@ function ProfileSection() {
       </div>
 
       <div className="pt-4 flex justify-end gap-3">
-        <Button variant="secondary" className="h-12 px-8 rounded-2xl border-neutral-800 text-neutral-400">Cancel</Button>
-        <Button className="bg-indigo-600 hover:bg-indigo-700 h-12 px-10 rounded-2xl">Save Changes</Button>
+        <Button variant="secondary" className="h-12 px-8 rounded-2xl border-neutral-800 text-neutral-400" onClick={() => alert('Cancelled - demo')}>Cancel</Button>
+        <Button variant="brand" className="h-12 px-10 rounded-2xl" onClick={() => alert('Profile saved - demo')}>Save Changes</Button>
       </div>
     </div>
   );
@@ -139,7 +139,7 @@ function BillingSection() {
             <div className="text-[10px] uppercase tracking-widest font-bold text-neutral-500 mb-4">Current Plan</div>
             <div className="text-2xl font-black mb-1">₦250,000<span className="text-sm font-medium text-neutral-500">/mo</span></div>
             <p className="text-xs text-neutral-400 mb-6">Next billing date: Sept 12, 2026</p>
-            <Button variant="secondary" className="w-full h-10 text-xs bg-neutral-900 border-neutral-800">Manage Subscription</Button>
+            <Button variant="secondary" className="w-full h-10 text-xs bg-neutral-900 border-neutral-800" onClick={() => alert('Manage Subscription - demo')}>Manage Subscription</Button>
           </div>
           <div className="bg-neutral-950 border border-neutral-800 rounded-2xl p-6">
             <div className="text-[10px] uppercase tracking-widest font-bold text-neutral-500 mb-4">Payment Method</div>
@@ -148,7 +148,7 @@ function BillingSection() {
               <span className="font-bold">•••• 4242</span>
             </div>
             <p className="text-xs text-neutral-400 mb-6">Expires 12/28</p>
-            <Button variant="secondary" className="w-full h-10 text-xs bg-neutral-900 border-neutral-800">Update Card</Button>
+            <Button variant="secondary" className="w-full h-10 text-xs bg-neutral-900 border-neutral-800" onClick={() => alert('Update Card - demo')}>Update Card</Button>
           </div>
         </div>
 
@@ -253,7 +253,7 @@ function NotificationsSection() {
       </div>
 
       <div className="pt-4 flex justify-end">
-        <Button className="bg-indigo-600 hover:bg-indigo-700 h-12 px-10 rounded-2xl">Update Preferences</Button>
+        <Button variant="brand" className="h-12 px-10 rounded-2xl" onClick={() => alert('Preferences updated - demo')}>Update Preferences</Button>
       </div>
     </div>
   );
@@ -271,7 +271,7 @@ function TeamSection() {
       <div className="bg-neutral-900 border border-neutral-800 rounded-[32px] p-8 space-y-8">
         <div className="flex items-center justify-between">
           <h3 className="text-xl font-bold">Team Members</h3>
-          <Button size="sm" className="bg-indigo-600 h-9 px-4 text-xs">
+          <Button size="sm" variant="brand" className="h-9 px-4 text-xs" onClick={() => alert('Invite sent - demo')}>
             <Plus className="w-4 h-4 mr-2" /> Invite Member
           </Button>
         </div>
@@ -308,7 +308,7 @@ function TeamSection() {
             <div className="text-sm font-bold mb-1">Two-Factor Authentication</div>
             <div className="text-[10px] text-neutral-500">Secure your account with an additional layer of security.</div>
           </div>
-          <Button variant="secondary" size="sm" className="h-9 px-6 bg-neutral-900 border-neutral-800 text-xs">Enable</Button>
+          <Button variant="secondary" size="sm" className="h-9 px-6 bg-neutral-900 border-neutral-800 text-xs" onClick={() => alert('2FA enabled - demo')}>Enable</Button>
         </div>
 
         <div className="p-6 bg-neutral-950 border border-neutral-800 rounded-2xl flex items-center justify-between">
@@ -316,7 +316,7 @@ function TeamSection() {
             <div className="text-sm font-bold mb-1">Session Management</div>
             <div className="text-[10px] text-neutral-500">Sign out of all other active sessions on other devices.</div>
           </div>
-          <Button variant="secondary" size="sm" className="h-9 px-6 bg-neutral-900 border-neutral-800 text-xs">Sign Out All</Button>
+          <Button variant="secondary" size="sm" className="h-9 px-6 bg-neutral-900 border-neutral-800 text-xs" onClick={() => alert('All sessions signed out - demo')}>Sign Out All</Button>
         </div>
       </div>
     </div>
@@ -349,8 +349,9 @@ function IntegrationsSection() {
             <h4 className="font-bold mb-1">{tool.name}</h4>
             <p className="text-[10px] text-neutral-500 mb-6">{tool.category} integration for data sync</p>
             <Button 
-              variant="secondary" 
-              className={`w-full h-10 text-xs ${tool.connected ? 'bg-neutral-900 border-neutral-800 text-rose-400' : 'bg-indigo-600 border-transparent text-white hover:bg-indigo-700'}`}
+              variant={tool.connected ? 'secondary' : 'brand'}
+              className={`w-full h-10 text-xs ${tool.connected ? 'bg-neutral-900 border-neutral-800 text-rose-400' : ''}`}
+              onClick={() => alert(tool.connected ? 'Disconnected - demo' : 'Connected - demo')}
             >
               {tool.connected ? 'Disconnect' : 'Connect Tool'}
             </Button>

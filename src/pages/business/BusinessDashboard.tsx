@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Target, Users, TrendingUp, DollarSign, Plus } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 
@@ -18,12 +17,10 @@ export function BusinessDashboard() {
           <h1 className="text-3xl font-bold tracking-tight mb-2">Business Overview</h1>
           <p className="text-neutral-400">Track your campaign performance and ROI.</p>
         </div>
-        <Link to="/business/create">
-          <Button className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white">
-            <Plus className="w-5 h-5" />
-            New Ad Campaign
-          </Button>
-        </Link>
+        <Button to="/business/create" variant="brand" className="flex items-center gap-2">
+          <Plus className="w-5 h-5" />
+          New Ad Campaign
+        </Button>
       </header>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">

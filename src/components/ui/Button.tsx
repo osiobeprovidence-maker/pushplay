@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '../../utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'brand' | 'brand-blue' | 'white';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  to?: string;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', isLoading, children, to, ...props }, ref) => {
     const baseStyles = 'inline-flex items-center justify-center rounded-full font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-black active:scale-[0.98]';
     
     const variants = {
@@ -28,10 +30,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       lg: 'h-14 px-8 text-lg',
     };
 
+    const classes = cn(baseStyles, variants[variant], sizes[size], className);
+
+    if (to) {
+      return (
+        <Link to={to} className={classes}>
+          {isLoading ? (
+            <span className="mr-2 inline-block h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+          ) : null}
+          {children}
+        </Link>
+      );
+    }
+
     return (
       <button
         ref={ref}
-        className={cn(baseStyles, variants[variant], sizes[size], className)}
+        className={classes}
         disabled={isLoading || props.disabled}
         {...props}
       >

@@ -18,12 +18,10 @@ export function CreatorDashboard() {
           <h1 className="text-3xl font-bold tracking-tight mb-2">Creator Overview</h1>
           <p className="text-neutral-400">Welcome back. Here's how your content is performing.</p>
         </div>
-        <Link to="/creator/create">
-          <Button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white">
-            <Plus className="w-5 h-5" />
-            New Campaign
-          </Button>
-        </Link>
+        <Button to="/creator/create" variant="brand-blue" className="flex items-center gap-2">
+          <Plus className="w-5 h-5" />
+          New Campaign
+        </Button>
       </header>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">

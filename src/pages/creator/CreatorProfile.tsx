@@ -30,10 +30,10 @@ export function CreatorProfile() {
               <h2 className="text-2xl font-bold mb-1">{user?.name}</h2>
               <p className="text-neutral-500 mb-6">{user?.username} • Certified Music Creator</p>
               <div className="flex flex-wrap justify-center md:justify-start gap-3">
-                <Button variant="secondary" className="h-10 bg-neutral-800 border-neutral-700 text-xs">
+                <Button variant="secondary" className="h-10 bg-neutral-800 border-neutral-700 text-xs" onClick={() => alert('Change Photo - demo')}>
                   Change Photo
                 </Button>
-                <Button variant="secondary" className="h-10 bg-rose-500/10 text-rose-500 border-rose-500/20 text-xs">
+                <Button variant="secondary" className="h-10 bg-rose-500/10 text-rose-500 border-rose-500/20 text-xs" onClick={() => alert('Photo removed - demo')}>
                   Remove
                 </Button>
               </div>
@@ -90,10 +90,10 @@ export function CreatorProfile() {
                 <Shield className="w-5 h-5 text-blue-500" />
                 <h3 className="font-bold">Account Security</h3>
               </div>
-              <Button variant="secondary" className="w-full h-11 bg-neutral-800 border-neutral-700 text-sm">
+              <Button variant="secondary" className="w-full h-11 bg-neutral-800 border-neutral-700 text-sm" onClick={() => alert('Password change - demo')}>
                 Change Password
               </Button>
-              <Button variant="secondary" className="w-full h-11 bg-neutral-800 border-neutral-700 text-sm">
+              <Button variant="secondary" className="w-full h-11 bg-neutral-800 border-neutral-700 text-sm" onClick={() => alert('2FA enabled - demo')}>
                 Enable 2FA
               </Button>
             </div>
@@ -101,7 +101,7 @@ export function CreatorProfile() {
         </div>
 
         <div className="flex justify-end pt-4">
-          <Button className="bg-blue-600 hover:bg-blue-700 h-12 px-10 rounded-2xl">
+          <Button variant="brand-blue" className="h-12 px-10 rounded-2xl" onClick={() => alert('Profile saved - demo')}>
             Save Changes
           </Button>
         </div>

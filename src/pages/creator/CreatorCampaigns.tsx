@@ -16,7 +16,8 @@ export function CreatorCampaigns() {
           <p className="text-neutral-400 text-sm">Manage and track your active and past promotion campaigns.</p>
         </div>
         <Button 
-          className="bg-blue-600 hover:bg-blue-700 h-12 px-6 rounded-2xl"
+          variant="brand-blue"
+          className="h-12 px-6 rounded-2xl"
           onClick={() => navigate('/creator/create')}
         >
           <Plus className="w-5 h-5 mr-2" />
