@@ -1,6 +1,4 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAppStore } from './store/useAppStore';
 
 // Layouts
 import { PublicLayout } from './components/layout/PublicLayout';
@@ -12,6 +10,7 @@ import { AdminLayout } from './components/layout/AdminLayout';
 // Public Pages
 import { Home } from './pages/public/Home';
 import { Login } from './pages/public/Login';
+import { DiscoverOverview } from './pages/public/DiscoverOverview';
 
 // User Pages
 import { Dashboard } from './pages/user/Dashboard';
@@ -44,8 +43,6 @@ import { BusinessSettings } from './pages/business/BusinessSettings';
 import { AdminDashboard } from './pages/admin/AdminDashboard';
 
 export default function App() {
-  const { isAuthenticated, user } = useAppStore();
-
   return (
     <BrowserRouter>
       <Routes>
@@ -54,6 +51,10 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
+          <Route path="/explore" element={<DiscoverOverview />} />
+          <Route path="/creators" element={<Navigate to="/signup" replace />} />
+          <Route path="/for-business" element={<Navigate to="/signup" replace />} />
+          <Route path="/pro" element={<Navigate to="/signup" replace />} />
         </Route>
 
         {/* User Routes */}

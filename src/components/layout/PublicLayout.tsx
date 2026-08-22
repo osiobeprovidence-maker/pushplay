@@ -14,9 +14,9 @@ export function PublicLayout() {
           </Link>
           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
-            <Link to="/discover" className="hover:text-white transition-colors">Discover</Link>
+            <Link to="/explore" className="hover:text-white transition-colors">Discover</Link>
             <Link to="/creators" className="hover:text-white transition-colors">Creators</Link>
-            <Link to="/business" className="hover:text-white transition-colors">Business</Link>
+            <Link to="/business/dashboard" className="hover:text-white transition-colors">Business</Link>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -48,7 +48,7 @@ export function PublicLayout() {
           <div>
             <h4 className="font-semibold mb-4 text-white">Platform</h4>
             <ul className="space-y-2 text-sm text-neutral-500">
-              <li><Link to="/discover" className="hover:text-white">Discover</Link></li>
+              <li><Link to="/explore" className="hover:text-white">Discover</Link></li>
               <li><Link to="/live" className="hover:text-white">Live Sessions</Link></li>
               <li><Link to="/rewards" className="hover:text-white">Rewards</Link></li>
               <li><Link to="/pro" className="hover:text-white">Push Play Pro</Link></li>
@@ -58,7 +58,7 @@ export function PublicLayout() {
             <h4 className="font-semibold mb-4 text-white">Partners</h4>
             <ul className="space-y-2 text-sm text-neutral-500">
               <li><Link to="/creators" className="hover:text-white">For Creators</Link></li>
-              <li><Link to="/business" className="hover:text-white">For Business</Link></li>
+              <li><Link to="/business/dashboard" className="hover:text-white">For Business</Link></li>
             </ul>
           </div>
         </div>

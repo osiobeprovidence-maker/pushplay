@@ -33,7 +33,7 @@ export function Home() {
         
         <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">
           <Link to="/signup">
-            <Button size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl bg-indigo-600 hover:bg-indigo-700 shadow-xl shadow-indigo-600/20 group">
+            <Button variant="brand" size="lg" className="w-full sm:w-auto h-16 px-10 text-lg rounded-2xl group">
               Join the Ecosystem
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -191,7 +191,7 @@ export function Home() {
               <p className="text-neutral-400">Join over 500+ businesses already thriving on Push Play.</p>
             </div>
             <Link to="/signup">
-              <Button size="lg" className="h-14 px-10 rounded-xl bg-white text-black hover:bg-neutral-200">
+              <Button variant="white" size="lg" className="h-14 px-10 rounded-xl">
                 Partner with Us
               </Button>
             </Link>
@@ -206,7 +206,7 @@ export function Home() {
           THE PLAY IS YOURS.
         </h2>
         <Link to="/signup">
-          <Button size="lg" className="h-20 px-16 text-xl rounded-full bg-indigo-600 hover:bg-indigo-700 shadow-2xl shadow-indigo-600/40 group">
+          <Button variant="brand" size="lg" className="h-20 px-16 text-xl rounded-full group">
             Get Started Now
             <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
           </Button>
