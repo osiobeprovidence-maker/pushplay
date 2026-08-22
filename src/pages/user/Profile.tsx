@@ -15,7 +15,7 @@ export function Profile() {
   ];
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl mx-auto w-full">
+    <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full">
       <div className="flex flex-col md:flex-row gap-8">
         
         {/* Left Column: Profile Info */}

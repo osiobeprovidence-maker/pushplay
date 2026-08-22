@@ -9,23 +9,23 @@ export function AdminUsers() {
     { name: 'Nike Nigeria', email: 'contact@nike.ng', role: 'Business', status: 'Active', points: '8,900' },
   ];
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <header className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <header className="mb-6 md:mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Users</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Users</h1>
           <p className="text-neutral-400 text-sm">Manage all platform users.</p>
         </div>
-        <Button onClick={() => alert('Invite user - demo')} variant="secondary">Invite User</Button>
+        <Button onClick={() => alert('Invite user - demo')} variant="secondary" className="w-full md:w-auto justify-center">Invite User</Button>
       </header>
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-4 md:mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-500" />
           <input placeholder="Search users..." className="w-full h-12 bg-neutral-900 border border-neutral-800 rounded-2xl pl-12 pr-4 text-white outline-none focus:border-neutral-600" />
         </div>
-        <Button variant="secondary" className="h-12 border-neutral-800 bg-neutral-900"><Filter className="w-4 h-4 mr-2" />Filters</Button>
+        <Button variant="secondary" className="h-12 border-neutral-800 bg-neutral-900 w-full sm:w-auto justify-center"><Filter className="w-4 h-4 mr-2" />Filters</Button>
       </div>
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden">
-        <table className="w-full text-left text-sm">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl overflow-hidden overflow-x-auto">
+        <table className="w-full text-left text-sm min-w-[520px]">
           <thead className="bg-neutral-950 text-neutral-400">
             <tr><th className="px-6 py-4">User</th><th className="px-6 py-4">Role</th><th className="px-6 py-4">Status</th><th className="px-6 py-4">Points</th></tr>
           </thead>

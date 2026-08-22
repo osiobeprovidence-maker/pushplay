@@ -18,13 +18,13 @@ export function Dashboard() {
   ];
 
   return (
-    <div className="p-6 md:p-8 max-w-6xl mx-auto w-full">
+    <div className="p-4 md:p-6 lg:p-8 max-w-6xl mx-auto w-full">
       <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Good afternoon, {user?.name.split(' ')[0]}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Good afternoon, {user?.name.split(' ')[0]}</h1>
         <p className="text-neutral-400">Here's your entertainment summary for today.</p>
       </header>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-10">
         {/* Balance Card */}
         <div className="lg:col-span-2 bg-neutral-900 border border-neutral-800 rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-[80px] rounded-full pointer-events-none" />
@@ -49,7 +49,7 @@ export function Dashboard() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8 mb-10">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-10">
         <div className="md:col-span-2">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold">Featured for You</h2>

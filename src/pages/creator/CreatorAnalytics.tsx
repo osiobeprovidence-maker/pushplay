@@ -14,20 +14,20 @@ const data = [
 
 export function CreatorAnalytics() {
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto w-full">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div className="p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 md:mb-10">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Analytics</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Analytics</h1>
           <p className="text-neutral-400 text-sm">Deep dive into your content performance and audience growth.</p>
         </div>
-        <div className="flex bg-neutral-900 border border-neutral-800 rounded-2xl p-1">
+        <div className="flex bg-neutral-900 border border-neutral-800 rounded-2xl p-1 shrink-0">
           <button className="px-4 py-2 text-xs font-bold bg-blue-600 rounded-xl">7D</button>
           <button className="px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors">30D</button>
           <button className="px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors">90D</button>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-10">
         <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
@@ -81,10 +81,10 @@ export function CreatorAnalytics() {
         </div>
       </div>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-[32px] p-8 mb-10">
-        <div className="flex items-center justify-between mb-8">
-          <h3 className="text-lg font-bold">Growth Overview</h3>
-          <div className="flex items-center gap-6">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-[32px] p-4 md:p-8 mb-6 md:mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 md:mb-8">
+          <h3 className="text-base md:text-lg font-bold">Growth Overview</h3>
+          <div className="flex items-center gap-4 md:gap-6">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-blue-500" />
               <span className="text-xs text-neutral-400">Views</span>
@@ -95,7 +95,7 @@ export function CreatorAnalytics() {
             </div>
           </div>
         </div>
-        <div className="h-[400px] w-full">
+        <div className="h-[280px] md:h-[400px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data}>
               <defs>
@@ -132,9 +132,9 @@ export function CreatorAnalytics() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
-          <h3 className="text-lg font-bold mb-6">Audience Demographics</h3>
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-8">
+          <h3 className="text-base md:text-lg font-bold mb-4 md:mb-6">Audience Demographics</h3>
           <div className="space-y-6">
             <div>
               <div className="flex justify-between text-xs mb-2">
@@ -166,8 +166,8 @@ export function CreatorAnalytics() {
           </div>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
-          <h3 className="text-lg font-bold mb-6">Top Locations</h3>
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-8">
+          <h3 className="text-base md:text-lg font-bold mb-4 md:mb-6">Top Locations</h3>
           <div className="space-y-4">
             {[
               { country: 'Nigeria', percentage: '65%', color: 'bg-emerald-500' },

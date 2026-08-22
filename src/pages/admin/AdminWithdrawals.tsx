@@ -9,10 +9,10 @@ export function AdminWithdrawals() {
     { user: 'Sarah Jenkins', amount: '₦12,500', method: 'Bank Transfer', status: 'Approved', date: '1d ago' },
   ];
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Withdrawals</h1>
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Withdrawals</h1>
       <p className="text-neutral-400 text-sm mb-8">Approve or reject payout requests.</p>
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden">
+      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead className="bg-neutral-950 text-neutral-400"><tr><th className="px-6 py-4">User</th><th className="px-6 py-4">Amount</th><th className="px-6 py-4">Status</th><th className="px-6 py-4">Action</th></tr></thead>
           <tbody className="divide-y divide-neutral-800">

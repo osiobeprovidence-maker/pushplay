@@ -12,19 +12,19 @@ export function CreatorDashboard() {
   ];
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <header className="mb-6 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Creator Overview</h1>
-          <p className="text-neutral-400">Welcome back. Here's how your content is performing.</p>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Creator Overview</h1>
+          <p className="text-neutral-400 text-sm">Welcome back. Here's how your content is performing.</p>
         </div>
-        <Button to="/creator/create" variant="brand-blue" className="flex items-center gap-2">
+        <Button to="/creator/create" variant="brand-blue" className="flex items-center gap-2 w-full md:w-auto justify-center">
           <Plus className="w-5 h-5" />
           New Campaign
         </Button>
       </header>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-10">
         {stats.map((stat, i) => (
           <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
             <div className={`w-12 h-12 rounded-2xl ${stat.bg} flex items-center justify-center mb-4`}>
@@ -36,15 +36,15 @@ export function CreatorDashboard() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold">Recent Campaigns</h2>
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="text-lg md:text-xl font-bold">Recent Campaigns</h2>
             <Link to="/creator/campaigns" className="text-sm text-blue-500 hover:text-blue-400">View all</Link>
           </div>
           
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden">
-            <table className="w-full text-left text-sm">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl overflow-hidden overflow-x-auto">
+            <table className="w-full text-left text-sm min-w-[520px]">
               <thead className="bg-neutral-950 text-neutral-400">
                 <tr>
                   <th className="px-6 py-4 font-medium">Campaign</th>
@@ -83,8 +83,8 @@ export function CreatorDashboard() {
         </div>
         
         <div className="lg:col-span-1">
-          <h2 className="text-xl font-bold mb-6">Audience Growth</h2>
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 h-64 flex flex-col items-center justify-center text-center">
+          <h2 className="text-lg md:text-xl font-bold mb-4 md:mb-6">Audience Growth</h2>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-6 h-64 flex flex-col items-center justify-center text-center">
             {/* Mock Chart Area */}
             <div className="w-full h-32 flex items-end justify-between gap-2 opacity-50 mb-4 px-4">
               {[40, 60, 45, 80, 55, 90, 75].map((h, i) => (

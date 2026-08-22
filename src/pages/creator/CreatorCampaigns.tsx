@@ -9,10 +9,10 @@ export function CreatorCampaigns() {
   const creatorCampaigns = MOCK_CAMPAIGNS.filter(c => c.creatorName === 'Alex Rivers');
 
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto w-full">
+    <div className="p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">My Campaigns</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">My Campaigns</h1>
           <p className="text-neutral-400 text-sm">Manage and track your active and past promotion campaigns.</p>
         </div>
         <Button 

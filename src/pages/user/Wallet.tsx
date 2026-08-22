@@ -11,9 +11,9 @@ export function Wallet() {
   const totalSpent = MOCK_TRANSACTIONS.filter(t => t.type === 'spend').reduce((acc, curr) => acc + curr.amount, 0);
 
   return (
-    <div className="p-6 md:p-8 max-w-4xl mx-auto w-full">
+    <div className="p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full">
       <header className="mb-10">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Wallet</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Wallet</h1>
         <p className="text-neutral-400">Manage your Play Points and history.</p>
       </header>
 

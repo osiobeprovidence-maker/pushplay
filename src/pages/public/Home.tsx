@@ -19,7 +19,7 @@ export function Home() {
           The Future of Interactive Entertainment
         </div>
         
-        <h1 className="text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-8 leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-1000">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-8 leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-1000">
           DISCOVER. <br />
           ENGAGE. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-white to-indigo-400 animate-gradient-x">
@@ -27,7 +27,7 @@ export function Home() {
           </span>
         </h1>
         
-        <p className="text-lg md:text-xl text-neutral-400 max-w-2xl mb-12 leading-relaxed animate-in fade-in slide-in-from-bottom-12 duration-1000">
+        <p className="text-base md:text-lg lg:text-xl text-neutral-400 max-w-2xl mb-12 leading-relaxed animate-in fade-in slide-in-from-bottom-12 duration-1000 px-4">
           Push Play is the ecosystem where your attention is an asset, your creativity is a career, and your brand finds its perfect pulse.
         </p>
         
@@ -195,7 +195,7 @@ export function Home() {
 
       {/* Final CTA */}
       <section className="py-32 px-6 bg-neutral-950 text-center relative overflow-hidden">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[280px] md:h-[400px] bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none" />
         <h2 className="text-5xl md:text-7xl font-black tracking-tighter mb-10">
           THE PLAY IS YOURS.
         </h2>

@@ -19,10 +19,10 @@ export function Rewards() {
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <header className="mb-6 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Rewards</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Rewards</h1>
           <p className="text-neutral-400">Redeem your Play Points for real value.</p>
         </div>
         <div className="bg-neutral-900 border border-neutral-800 rounded-2xl px-6 py-4 flex items-center gap-4">

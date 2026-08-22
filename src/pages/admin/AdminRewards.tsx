@@ -4,8 +4,8 @@ import { Button } from '../../components/ui/Button';
 
 export function AdminRewards() {
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Rewards</h1>
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Rewards</h1>
       <p className="text-neutral-400 text-sm mb-8">Manage reward catalog.</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {[

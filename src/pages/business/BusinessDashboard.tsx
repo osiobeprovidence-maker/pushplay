@@ -11,19 +11,19 @@ export function BusinessDashboard() {
   ];
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <header className="mb-6 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Business Overview</h1>
-          <p className="text-neutral-400">Track your campaign performance and ROI.</p>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Business Overview</h1>
+          <p className="text-neutral-400 text-sm">Track your campaign performance and ROI.</p>
         </div>
-        <Button to="/business/create" variant="brand" className="flex items-center gap-2">
+        <Button to="/business/create" variant="brand" className="flex items-center gap-2 w-full md:w-auto justify-center">
           <Plus className="w-5 h-5" />
           New Ad Campaign
         </Button>
       </header>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-10">
         {stats.map((stat, i) => (
           <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
             <div className={`w-12 h-12 rounded-2xl ${stat.bg} flex items-center justify-center mb-4`}>
@@ -35,13 +35,13 @@ export function BusinessDashboard() {
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold">Campaign Performance</h2>
+          <div className="flex items-center justify-between mb-4 md:mb-6">
+            <h2 className="text-lg md:text-xl font-bold">Campaign Performance</h2>
           </div>
           
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6 h-80 flex flex-col">
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-6 h-64 md:h-80 flex flex-col">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <div className="text-sm text-neutral-400">Total Engagements</div>
@@ -66,8 +66,8 @@ export function BusinessDashboard() {
         </div>
         
         <div className="lg:col-span-1">
-          <h2 className="text-xl font-bold mb-6">Recent Activity</h2>
-          <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden divide-y divide-neutral-800">
+          <h2 className="text-lg md:text-xl font-bold mb-4 md:mb-6">Recent Activity</h2>
+          <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl overflow-hidden divide-y divide-neutral-800">
             {[
               { title: 'Summer Sale Promo', metric: '4.2k completes', time: '2h ago' },
               { title: 'New Product Launch', metric: '1.8k views', time: '5h ago' },

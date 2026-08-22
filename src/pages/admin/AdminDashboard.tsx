@@ -10,15 +10,15 @@ export function AdminDashboard() {
   ];
 
   return (
-    <div className="p-6 md:p-8 max-w-7xl mx-auto w-full">
-      <header className="mb-10 flex items-end justify-between">
+    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+      <header className="mb-6 md:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Admin Dashboard</h1>
-          <p className="text-neutral-400">Platform overview and key metrics.</p>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Admin Dashboard</h1>
+          <p className="text-neutral-400 text-sm">Platform overview and key metrics.</p>
         </div>
       </header>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-10">
         {stats.map((stat, i) => (
           <div key={i} className="bg-neutral-900 border border-neutral-800 rounded-3xl p-6">
             <div className="flex justify-between items-start mb-4">
@@ -33,11 +33,11 @@ export function AdminDashboard() {
         ))}
       </div>
 
-      <div className="bg-neutral-900 border border-neutral-800 rounded-3xl overflow-hidden">
-        <div className="p-6 border-b border-neutral-800 flex justify-between items-center">
-          <h2 className="text-xl font-bold">Recent Signups</h2>
+      <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl overflow-hidden overflow-x-auto">
+        <div className="p-4 md:p-6 border-b border-neutral-800 flex justify-between items-center">
+          <h2 className="text-base md:text-xl font-bold">Recent Signups</h2>
         </div>
-        <table className="w-full text-left text-sm">
+        <table className="w-full text-left text-sm min-w-[520px]">
           <thead className="bg-neutral-950 text-neutral-400">
             <tr>
               <th className="px-6 py-4 font-medium">User</th>

@@ -4,8 +4,8 @@ import { Button } from '../../components/ui/Button';
 
 export function AdminSettings() {
   return (
-    <div className="p-6 md:p-8 max-w-5xl mx-auto w-full">
-      <h1 className="text-3xl font-bold tracking-tight mb-2">Settings</h1>
+    <div className="p-4 md:p-6 lg:p-8 max-w-5xl mx-auto w-full">
+      <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Settings</h1>
       <p className="text-neutral-400 text-sm mb-8">Platform configuration.</p>
       <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8 space-y-6">
         <div className="flex items-center gap-3 mb-4"><Settings className="w-6 h-6 text-white" /><h3 className="text-xl font-bold">General</h3></div>

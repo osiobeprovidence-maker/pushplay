@@ -30,9 +30,9 @@ export function CreatorCreate() {
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-3xl mx-auto w-full">
+    <div className="p-4 md:p-6 lg:p-8 max-w-3xl mx-auto w-full">
       <header className="mb-10 text-center">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Create Campaign</h1>
+        <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Create Campaign</h1>
         <p className="text-neutral-400">Launch a new rewarded experience for your audience.</p>
         
         {/* Progress Bar */}

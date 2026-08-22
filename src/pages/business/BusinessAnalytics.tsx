@@ -20,34 +20,34 @@ const categoryData = [
 
 export function BusinessAnalytics() {
   return (
-    <div className="p-6 md:p-10 max-w-7xl mx-auto w-full">
-      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+    <div className="p-4 md:p-6 lg:p-10 max-w-7xl mx-auto w-full">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 md:mb-10">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Advanced Analytics</h1>
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight mb-2">Advanced Analytics</h1>
           <p className="text-neutral-400 text-sm">Measure your return on investment and campaign effectiveness.</p>
         </div>
-        <div className="flex bg-neutral-900 border border-neutral-800 rounded-2xl p-1">
-          <button className="px-4 py-2 text-xs font-bold bg-indigo-600 rounded-xl">Real-time</button>
-          <button className="px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors">Past 30 Days</button>
-          <button className="px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors">Custom Range</button>
+        <div className="flex bg-neutral-900 border border-neutral-800 rounded-2xl p-1 overflow-x-auto scrollbar-hide max-w-full">
+          <button className="px-3 md:px-4 py-2 text-xs font-bold bg-indigo-600 rounded-xl whitespace-nowrap shrink-0">Real-time</button>
+          <button className="px-3 md:px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors whitespace-nowrap shrink-0">Past 30 Days</button>
+          <button className="px-3 md:px-4 py-2 text-xs font-bold text-neutral-500 hover:text-white transition-colors whitespace-nowrap shrink-0">Custom</button>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-10">
         <StatsCard icon={Target} label="Total Reach" value="2.4M" trend="+15.2%" isUp />
         <StatsCard icon={MousePointer2} label="Conversions" value="84.2k" trend="+12.4%" isUp />
         <StatsCard icon={TrendingUp} label="Avg. CTR" value="4.2%" trend="+0.8%" isUp />
         <StatsCard icon={BarChart3} label="ROI" value="3.8x" trend="-2.1%" isUp={false} />
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8 mb-10">
-        <div className="lg:col-span-2 bg-neutral-900 border border-neutral-800 rounded-[32px] p-8">
-          <div className="flex items-center justify-between mb-8">
+      <div className="grid lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
+        <div className="lg:col-span-2 bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-[32px] p-4 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 md:mb-8">
             <div>
-              <h3 className="text-lg font-bold">Performance Trends</h3>
+              <h3 className="text-base md:text-lg font-bold">Performance Trends</h3>
               <p className="text-xs text-neutral-500">Reach vs Conversions over the last 7 days</p>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 md:gap-6">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-indigo-500" />
                 <span className="text-xs text-neutral-400">Reach</span>
@@ -58,7 +58,7 @@ export function BusinessAnalytics() {
               </div>
             </div>
           </div>
-          <div className="h-[350px] w-full">
+          <div className="h-[280px] md:h-[350px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={timelineData}>
                 <defs>
@@ -81,9 +81,9 @@ export function BusinessAnalytics() {
           </div>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-[32px] p-8">
-          <h3 className="text-lg font-bold mb-8">Spend by Channel</h3>
-          <div className="h-[250px] w-full mb-8">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-[32px] p-4 md:p-8">
+          <h3 className="text-base md:text-lg font-bold mb-6 md:mb-8">Spend by Channel</h3>
+          <div className="h-[220px] md:h-[250px] w-full mb-6 md:mb-8">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -117,9 +117,9 @@ export function BusinessAnalytics() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
-          <h3 className="text-lg font-bold mb-6">Top Performing Ads</h3>
+      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-8">
+          <h3 className="text-base md:text-lg font-bold mb-4 md:mb-6">Top Performing Ads</h3>
           <div className="space-y-6">
             {[1, 2, 3].map((i) => (
               <div key={i} className="flex items-center gap-4 group cursor-pointer">
@@ -139,8 +139,8 @@ export function BusinessAnalytics() {
           </div>
         </div>
 
-        <div className="bg-neutral-900 border border-neutral-800 rounded-3xl p-8">
-          <h3 className="text-lg font-bold mb-6">Cost per Acquisition (CPA)</h3>
+        <div className="bg-neutral-900 border border-neutral-800 rounded-2xl md:rounded-3xl p-4 md:p-8">
+          <h3 className="text-base md:text-lg font-bold mb-4 md:mb-6">Cost per Acquisition (CPA)</h3>
           <div className="space-y-4">
             {[
               { label: 'Music Fans', value: '₦45.20', progress: 65 },
