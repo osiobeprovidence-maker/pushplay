@@ -16,7 +16,7 @@ export function PublicLayout() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
             <Link to="/explore" className="hover:text-white transition-colors">Discover</Link>
             <Link to="/creators" className="hover:text-white transition-colors">Creators</Link>
-            <Link to="/business/dashboard" className="hover:text-white transition-colors">Business</Link>
+            <Link to="/for-business" className="hover:text-white transition-colors">Business</Link>
           </nav>
 
           <div className="flex items-center gap-4">
@@ -58,7 +58,7 @@ export function PublicLayout() {
             <h4 className="font-semibold mb-4 text-white">Partners</h4>
             <ul className="space-y-2 text-sm text-neutral-500">
               <li><Link to="/creators" className="hover:text-white">For Creators</Link></li>
-              <li><Link to="/business/dashboard" className="hover:text-white">For Business</Link></li>
+              <li><Link to="/for-business" className="hover:text-white">For Business</Link></li>
             </ul>
           </div>
         </div>

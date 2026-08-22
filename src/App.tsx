@@ -11,6 +11,8 @@ import { AdminLayout } from './components/layout/AdminLayout';
 import { Home } from './pages/public/Home';
 import { Login } from './pages/public/Login';
 import { DiscoverOverview } from './pages/public/DiscoverOverview';
+import { CreatorsOverview } from './pages/public/CreatorsOverview';
+import { BusinessOverview } from './pages/public/BusinessOverview';
 
 // User Pages
 import { Dashboard } from './pages/user/Dashboard';
@@ -52,8 +54,8 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
           <Route path="/explore" element={<DiscoverOverview />} />
-          <Route path="/creators" element={<Navigate to="/signup" replace />} />
-          <Route path="/for-business" element={<Navigate to="/signup" replace />} />
+          <Route path="/creators" element={<CreatorsOverview />} />
+          <Route path="/for-business" element={<BusinessOverview />} />
           <Route path="/pro" element={<Navigate to="/signup" replace />} />
         </Route>
 

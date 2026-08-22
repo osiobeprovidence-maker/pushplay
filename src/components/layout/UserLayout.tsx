@@ -1,12 +1,18 @@
 import React from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { Home, Compass, Radio, Gift, User, PlayCircle, LogOut } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { cn } from '../../utils';
 
 export function UserLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, logout } = useAppStore();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/', { replace: true });
+  };
 
   const navItems = [
     { icon: Home, label: 'Home', path: '/dashboard' },
@@ -50,7 +56,7 @@ export function UserLayout() {
             <div className="text-2xl font-bold">{user?.points.toLocaleString()}</div>
           </div>
           <button 
-            onClick={logout}
+            onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200 font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white w-full"
           >
             <LogOut className="w-5 h-5" />
