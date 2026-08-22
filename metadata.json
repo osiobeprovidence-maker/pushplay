@@ -1,0 +1,6 @@
+{
+  "name": "Push Play",
+  "description": "Play. Engage. Get Rewarded. A modern entertainment and rewards platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

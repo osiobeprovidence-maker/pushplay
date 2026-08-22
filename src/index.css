@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-950: #0a0a0a;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-950 text-neutral-50 antialiased;
+  }
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Safe area padding for mobile PWA feel */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
