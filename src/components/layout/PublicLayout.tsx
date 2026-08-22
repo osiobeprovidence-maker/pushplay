@@ -83,9 +83,9 @@ export function PublicLayout() {
             <h4 className="font-semibold mb-4 text-white">Platform</h4>
             <ul className="space-y-2 text-sm text-neutral-500">
               <li><Link to="/explore" className="hover:text-white">Discover</Link></li>
-              <li><Link to="/#live-arenas" className="hover:text-white">Live Sessions</Link></li>
-              <li><Link to="/#rewards" className="hover:text-white">Rewards</Link></li>
-              <li><Link to="/#pro" className="hover:text-white">Push Play Pro</Link></li>
+              <li><Link to="/live" className="hover:text-white">Live Sessions</Link></li>
+              <li><Link to="/rewards" className="hover:text-white">Rewards</Link></li>
+              <li><Link to="/pro" className="hover:text-white">Push Play Pro</Link></li>
             </ul>
           </div>
           <div>

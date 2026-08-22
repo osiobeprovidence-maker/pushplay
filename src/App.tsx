@@ -13,6 +13,9 @@ import { Login } from './pages/public/Login';
 import { DiscoverOverview } from './pages/public/DiscoverOverview';
 import { CreatorsOverview } from './pages/public/CreatorsOverview';
 import { BusinessOverview } from './pages/public/BusinessOverview';
+import { LiveSessions } from './pages/public/LiveSessions';
+import { Rewards as RewardsPage } from './pages/public/Rewards';
+import { Pro } from './pages/public/Pro';
 
 // User Pages
 import { Dashboard } from './pages/user/Dashboard';
@@ -62,14 +65,17 @@ export default function App() {
           <Route path="/explore" element={<DiscoverOverview />} />
           <Route path="/creators" element={<CreatorsOverview />} />
           <Route path="/for-business" element={<BusinessOverview />} />
+          <Route path="/live" element={<LiveSessions />} />
+          <Route path="/rewards" element={<RewardsPage />} />
+          <Route path="/pro" element={<Pro />} />
         </Route>
 
         {/* User Routes */}
         <Route element={<UserLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/discover" element={<Discover />} />
-          <Route path="/rewards" element={<Rewards />} />
-          <Route path="/live" element={<Live />} />
+          <Route path="/app/rewards" element={<Rewards />} />
+          <Route path="/app/live" element={<Live />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wallet" element={<Wallet />} />
           <Route path="/watch/:id" element={<Watch />} />

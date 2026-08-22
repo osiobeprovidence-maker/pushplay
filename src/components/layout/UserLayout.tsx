@@ -19,8 +19,8 @@ export function UserLayout() {
   const navItems = [
     { icon: Home, label: 'Home', path: '/dashboard' },
     { icon: Compass, label: 'Discover', path: '/discover' },
-    { icon: Radio, label: 'Live', path: '/live' },
-    { icon: Gift, label: 'Rewards', path: '/rewards' },
+    { icon: Radio, label: 'Live', path: '/app/live' },
+    { icon: Gift, label: 'Rewards', path: '/app/rewards' },
     { icon: User, label: 'Profile', path: '/profile' },
   ];
 
