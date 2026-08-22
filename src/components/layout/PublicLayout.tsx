@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import { PlayCircle, Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 export function PublicLayout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.getElementById(location.hash.slice(1));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-50 selection:bg-white selection:text-black">
       <header className="sticky top-0 z-50 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-900">
@@ -72,9 +83,9 @@ export function PublicLayout() {
             <h4 className="font-semibold mb-4 text-white">Platform</h4>
             <ul className="space-y-2 text-sm text-neutral-500">
               <li><Link to="/explore" className="hover:text-white">Discover</Link></li>
-              <li><Link to="/live" className="hover:text-white">Live Sessions</Link></li>
-              <li><Link to="/rewards" className="hover:text-white">Rewards</Link></li>
-              <li><Link to="/pro" className="hover:text-white">Push Play Pro</Link></li>
+              <li><Link to="/#live-arenas" className="hover:text-white">Live Sessions</Link></li>
+              <li><Link to="/#rewards" className="hover:text-white">Rewards</Link></li>
+              <li><Link to="/#pro" className="hover:text-white">Push Play Pro</Link></li>
             </ul>
           </div>
           <div>

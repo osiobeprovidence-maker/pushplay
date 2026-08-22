@@ -51,12 +51,9 @@ export function CreatorsOverview() {
           </ul>
 
           <div className="relative aspect-square rounded-[40px] overflow-hidden border border-white/10 group">
-            <img
-              src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-              alt="Creator in studio"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-indigo-900 to-neutral-900" />
+            <div className="absolute top-8 right-8 w-32 h-32 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute bottom-8 left-8 w-40 h-40 rounded-full bg-blue-500/20 blur-3xl" />
             <div className="absolute bottom-6 left-6 right-6">
               <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
                 <div className="flex items-center gap-4">

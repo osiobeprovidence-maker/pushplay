@@ -62,7 +62,6 @@ export default function App() {
           <Route path="/explore" element={<DiscoverOverview />} />
           <Route path="/creators" element={<CreatorsOverview />} />
           <Route path="/for-business" element={<BusinessOverview />} />
-          <Route path="/pro" element={<Navigate to="/signup" replace />} />
         </Route>
 
         {/* User Routes */}
