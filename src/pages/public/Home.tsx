@@ -21,14 +21,14 @@ export function Home() {
         
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-8 leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-1000">
           DISCOVER. <br />
-          ENGAGE. <br />
+          COMPLETE. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-white to-indigo-400 animate-gradient-x">
-            THRIVE.
+            EARN.
           </span>
         </h1>
         
         <p className="text-base md:text-lg lg:text-xl text-neutral-400 max-w-2xl mb-12 leading-relaxed animate-in fade-in slide-in-from-bottom-12 duration-1000 px-4">
-          Push Play is the ecosystem where your attention is an asset, your creativity is a career, and your brand finds its perfect pulse.
+          Push Play is the digital engagement platform where you discover content, complete experiences, and earn rewards — every interaction counts.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-300">

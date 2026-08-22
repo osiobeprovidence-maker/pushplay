@@ -11,11 +11,11 @@ export function Rewards() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />
         <div className="text-indigo-500 font-black tracking-widest uppercase text-sm mb-4">Rewards</div>
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter max-w-5xl mb-8 leading-[0.95]">
-          YOUR ATTENTION, <br />
+          EVERY EXPERIENCE, <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-white to-indigo-400">NOW REWARDED.</span>
         </h1>
         <p className="text-base md:text-lg lg:text-xl text-neutral-400 max-w-2xl mb-12 leading-relaxed">
-          Earn Play Points for every moment you engage — then convert them into real cash, gift cards, and exclusive perks.
+          Earn Play Points for every experience you complete — then redeem them for real cash, gift cards, and exclusive perks.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
           <Button to="/signup" variant="brand" size="lg" className="h-16 px-10 rounded-2xl group">
@@ -77,7 +77,7 @@ export function Rewards() {
       </section>
 
       <section className="py-24 px-6 bg-neutral-950 text-center">
-        <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">START GETTING PAID TO PLAY</h2>
+        <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">START EARNING REWARDS</h2>
         <Button to="/signup" variant="brand" size="lg" className="h-16 px-12 rounded-full group">
           Join Now
           <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

@@ -76,7 +76,7 @@ export function PublicLayout() {
               <span className="text-lg font-bold tracking-tight">Push Play</span>
             </div>
             <p className="text-neutral-500 text-sm max-w-sm">
-              Play. Engage. Get Rewarded. The modern entertainment platform where your attention has real value.
+              Discover content. Complete experiences. Earn rewards. The digital engagement platform where every interaction matters.
             </p>
           </div>
           <div>
