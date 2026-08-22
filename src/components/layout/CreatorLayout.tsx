@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Megaphone, Video, Radio, BarChart3, LogOut, PlayCircle, Trophy, User } from 'lucide-react';
+import { LayoutDashboard, Megaphone, Video, Radio, BarChart3, LogOut, PlayCircle, Trophy, User, Menu, X } from 'lucide-react';
 import { useAppStore } from '../../store/useAppStore';
 import { cn } from '../../utils';
 
@@ -8,9 +8,11 @@ export function CreatorLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAppStore();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
+    setIsMenuOpen(false);
     navigate('/', { replace: true });
   };
 
@@ -70,13 +72,70 @@ export function CreatorLayout() {
       </aside>
 
       <main className="flex-1 relative flex flex-col h-full overflow-y-auto">
-        <div className="md:hidden flex items-center justify-between p-4 border-b border-neutral-800">
+        {/* Mobile Header with Hamburger */}
+        <div className="md:hidden flex items-center justify-between p-4 border-b border-neutral-800 bg-neutral-950 sticky top-0 z-30">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 rounded-xl hover:bg-neutral-800 transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+          </button>
           <div className="flex items-center gap-2">
             <PlayCircle className="w-6 h-6 text-blue-500" />
             <span className="font-bold">Creator</span>
           </div>
           <img src={user?.avatar} alt="" className="w-8 h-8 rounded-full" />
         </div>
+
+        {/* Mobile Drawer */}
+        {isMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-40 flex">
+            <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
+            <div className="w-72 bg-neutral-950 border-l border-neutral-800 flex flex-col overflow-y-auto">
+              <div className="p-6 flex items-center gap-2 border-b border-neutral-800">
+                <PlayCircle className="w-8 h-8 text-blue-500" />
+                <span className="text-xl font-bold tracking-tight">Push Play <span className="text-blue-500 font-normal text-sm">Creator</span></span>
+              </div>
+              <nav className="flex-1 px-4 space-y-2 mt-4">
+                {navItems.map((item) => {
+                  const isActive = location.pathname.startsWith(item.path);
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200 font-medium",
+                        isActive ? "bg-blue-600 text-white" : "text-neutral-400 hover:bg-neutral-800 hover:text-white"
+                      )}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </nav>
+              <div className="p-4 mt-auto border-t border-neutral-800">
+                <div className="flex items-center gap-3 px-4 py-3 mb-4 rounded-2xl bg-neutral-900 border border-neutral-800">
+                  <img src={user?.avatar} alt="" className="w-10 h-10 rounded-full" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-bold text-white truncate">{user?.name}</div>
+                    <div className="text-xs text-neutral-500 truncate">{user?.username}</div>
+                  </div>
+                </div>
+                <button 
+                  onClick={handleLogout}
+                  className="flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200 font-medium text-neutral-400 hover:bg-neutral-800 hover:text-white w-full"
+                >
+                  <LogOut className="w-5 h-5" />
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <Outlet />
       </main>
     </div>

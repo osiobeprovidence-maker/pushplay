@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
-import { PlayCircle } from 'lucide-react';
+import { PlayCircle, Menu, X } from 'lucide-react';
 import { Button } from '../ui/Button';
 
 export function PublicLayout() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="min-h-screen flex flex-col bg-neutral-950 text-neutral-50 selection:bg-white selection:text-black">
       <header className="sticky top-0 z-50 bg-neutral-950/80 backdrop-blur-xl border-b border-neutral-900">
@@ -12,7 +13,7 @@ export function PublicLayout() {
             <PlayCircle className="w-8 h-8 text-white group-hover:scale-105 transition-transform" />
             <span className="text-xl font-bold tracking-tight">Push Play</span>
           </Link>
-          
+           
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
             <Link to="/explore" className="hover:text-white transition-colors">Discover</Link>
             <Link to="/creators" className="hover:text-white transition-colors">Creators</Link>
@@ -23,9 +24,33 @@ export function PublicLayout() {
             <Link to="/login" className="text-sm font-medium text-white hover:text-neutral-300 transition-colors hidden sm:block">
               Log in
             </Link>
-            <Button to="/signup" size="sm">Get Started</Button>
+            <Button to="/signup" size="sm" className="hidden md:inline-flex">Get Started</Button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 rounded-xl hover:bg-neutral-800 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
+            </button>
           </div>
         </div>
+        {/* Mobile Drawer */}
+        {isMenuOpen && (
+          <div className="md:hidden fixed inset-0 top-20 z-40 flex">
+            <div className="flex-1 bg-black/60 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
+            <div className="w-72 bg-neutral-950 border-l border-neutral-800 flex flex-col p-6">
+              <nav className="space-y-2">
+                <Link to="/explore" onClick={() => setIsMenuOpen(false)} className="flex items-center px-4 py-3 rounded-2xl text-neutral-300 hover:bg-neutral-900 hover:text-white transition-colors">Discover</Link>
+                <Link to="/creators" onClick={() => setIsMenuOpen(false)} className="flex items-center px-4 py-3 rounded-2xl text-neutral-300 hover:bg-neutral-900 hover:text-white transition-colors">Creators</Link>
+                <Link to="/for-business" onClick={() => setIsMenuOpen(false)} className="flex items-center px-4 py-3 rounded-2xl text-neutral-300 hover:bg-neutral-900 hover:text-white transition-colors">Business</Link>
+                <div className="pt-4 mt-4 border-t border-neutral-800 space-y-2">
+                  <Link to="/login" onClick={() => setIsMenuOpen(false)} className="flex items-center px-4 py-3 rounded-2xl text-neutral-400 hover:bg-neutral-900 hover:text-white transition-colors">Log in</Link>
+                  <Link to="/signup" onClick={() => setIsMenuOpen(false)} className="flex items-center justify-center px-4 py-3 rounded-2xl bg-white text-black font-medium hover:bg-neutral-200 transition-colors">Get Started</Link>
+                </div>
+              </nav>
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="flex-1 flex flex-col">
