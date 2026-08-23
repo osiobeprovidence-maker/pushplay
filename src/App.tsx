@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ConvexProvider, useMutation, useQuery } from 'convex/react';
 import { auth } from './lib/firebase';
-import { convex } from './lib/convexClient';
+import { convex, syncConvexAuth } from './lib/convexClient';
 import { useAppStore } from './store/useAppStore';
 import { Role } from './types';
 
@@ -72,6 +72,9 @@ function AuthBridge() {
   const [fbUser, setFbUser] = useState<FirebaseUser | null>(null);
 
   useEffect(() => {
+    // Re-register the Convex token provider on every auth change (login,
+    // logout, token refresh) so authenticated calls carry a valid JWT.
+    syncConvexAuth();
     return auth.onAuthStateChanged((next) => setFbUser(next));
   }, []);
 
