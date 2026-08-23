@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ConvexProvider, useMutation, useQuery } from 'convex/react';
+import { ConvexProvider, useMutation, useQuery, useConvexAuth } from 'convex/react';
 import { auth } from './lib/firebase';
 import { convex, syncConvexAuth } from './lib/convexClient';
 import { useAppStore } from './store/useAppStore';
@@ -72,10 +72,14 @@ function AuthBridge() {
   const [fbUser, setFbUser] = useState<FirebaseUser | null>(null);
 
   useEffect(() => {
-    // Re-register the Convex token provider on every auth change (login,
-    // logout, token refresh) so authenticated calls carry a valid JWT.
-    syncConvexAuth();
-    return auth.onAuthStateChanged((next) => setFbUser(next));
+    // onAuthStateChanged fires on registration AND every login/logout/token
+    // change, so the Convex token provider is re-registered exactly when the
+    // signed-in identity changes. Without this, a setAuth that first resolves
+    // while signed out leaves the Convex client unauthenticated forever.
+    return auth.onAuthStateChanged((next) => {
+      syncConvexAuth();
+      setFbUser(next);
+    });
   }, []);
 
   useEffect(() => {
@@ -106,32 +110,53 @@ function ConvexSync() {
 }
 
 function ConvexSyncInner({ uid }: { uid: string }) {
-  const { user, patchUser } = useAppStore();
+  const { user, patchUser, markRoleSynced } = useAppStore();
+  const roleDirty = useAppStore((s) => s.roleDirty);
+  const { isAuthenticated } = useConvexAuth();
   const storeUser = useMutation("users/storeUser" as any);
+  const setUserRole = useMutation("users/setUserRole" as any);
   const profile = useQuery("users/getCurrentUser" as any) as
     | { points: number; isPro: boolean; role: string }
     | null
     | undefined;
 
+  // Create/update the Convex profile. Gated on isAuthenticated so the call
+  // never fires before the Firebase JWT has attached to the Convex client.
   useEffect(() => {
-    if (user?.source === "firebase") {
-      void storeUser({
-        email: user.email,
-        name: user.name,
-        emailVerified: !!user.emailVerified,
-      }).catch(() => {});
-    }
-  }, [uid, user?.source, storeUser]);
+    if (!isAuthenticated || user?.source !== "firebase") return;
+    void storeUser({
+      email: user.email,
+      name: user.name,
+      emailVerified: !!user.emailVerified,
+    }).catch(() => {});
+  }, [isAuthenticated, uid, user?.source, user?.email, user?.name, user?.emailVerified, storeUser]);
 
+  // Push a locally-chosen role (onboarding) to the server exactly once.
+  useEffect(() => {
+    if (!roleDirty || !user?.role) return;
+    if (!isAuthenticated || user?.source !== "firebase") return;
+    let cancelled = false;
+    void setUserRole({ role: user.role })
+      .then(() => {
+        if (!cancelled) markRoleSynced();
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [roleDirty, isAuthenticated, user?.source, user?.role, setUserRole, markRoleSynced]);
+
+  // Mirror server-side points/isPro/role into the local store. A pending
+  // local role choice is never clobbered by a stale server snapshot.
   useEffect(() => {
     if (profile && user?.source === "firebase") {
       patchUser({
         points: profile.points,
         isPro: profile.isPro,
-        role: profile.role as Role,
+        ...(roleDirty ? {} : { role: profile.role as Role }),
       });
     }
-  }, [profile, user?.source, patchUser]);
+  }, [profile, user?.source, roleDirty, patchUser]);
 
   return null;
 }

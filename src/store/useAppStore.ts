@@ -7,10 +7,13 @@ import type { FirebaseUser } from '../lib/auth';
 interface AppState {
   user: User | null;
   isAuthenticated: boolean;
+  /** True while a locally-changed role has not been confirmed by the server. */
+  roleDirty: boolean;
   login: (role?: Role) => void;
   loginWithFirebase: (fbUser: FirebaseUser) => void;
   logout: () => void;
   patchUser: (partial: Partial<User>) => void;
+  markRoleSynced: (role?: Role) => void;
   addPoints: (points: number) => void;
   deductPoints: (points: number) => void;
   updateProStatus: (status: boolean) => void;
@@ -38,24 +41,26 @@ function buildFirebaseUser(fbUser: FirebaseUser): User {
 export const useAppStore = create<AppState>((set) => ({
   user: null, // Start logged out for the landing page
   isAuthenticated: false,
+  roleDirty: false,
 
   // Demo / mock login (kept for showcase accounts).
   login: (role = 'user') =>
     set({
       user: { ...currentUser, role, source: 'demo' },
       isAuthenticated: true,
+      roleDirty: false,
     }),
 
   // Real Firebase login: set the user immediately. Convex sync (persist +
   // load profile) is handled by the ConvexSync component once deployed.
   loginWithFirebase: (fbUser) => {
     const user = buildFirebaseUser(fbUser);
-    set({ user, isAuthenticated: true });
+    set({ user, isAuthenticated: true, roleDirty: false });
   },
 
   logout: () => {
     void signOutFirebase().catch(() => {});
-    set({ user: null, isAuthenticated: false });
+    set({ user: null, isAuthenticated: false, roleDirty: false });
   },
 
   addPoints: (points) =>
@@ -76,5 +81,16 @@ export const useAppStore = create<AppState>((set) => ({
   patchUser: (partial) =>
     set((state) => ({
       user: state.user ? { ...state.user, ...partial } : null,
+      // A role set from the UI (onboarding) is pending until the server
+      // confirms it; ConvexSync uses this to avoid clobbering/echo loops.
+      ...(partial.role !== undefined ? { roleDirty: true } : {}),
+    })),
+
+  // Called once the server-side role matches what we asked for.
+  markRoleSynced: (role) =>
+    set((state) => ({
+      roleDirty: false,
+      user:
+        state.user && role ? { ...state.user, role } : state.user,
     })),
 }));

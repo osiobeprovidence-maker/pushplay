@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { PlayCircle, Video, Briefcase, ChevronRight } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { useAppStore } from '../../store/useAppStore';
-import { useMutation } from 'convex/react';
 import type { Role } from '../../types';
 
 const purposes: {
@@ -38,7 +37,6 @@ const purposes: {
 export function Onboarding() {
   const navigate = useNavigate();
   const { isAuthenticated, user, patchUser } = useAppStore();
-  const setUserRole = useMutation('users/setUserRole' as any);
   const [selected, setSelected] = useState<Role | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -49,9 +47,9 @@ export function Onboarding() {
   const handleContinue = () => {
     if (!selected) return;
     setIsSaving(true);
+    // Role persistence to Convex is handled centrally by ConvexSync
+    // (App.tsx); here we just record the choice and move on.
     patchUser({ role: selected });
-    // Persist the choice to Convex (best effort — never blocks navigation).
-    void setUserRole({ role: selected }).catch(() => {});
     setTimeout(() => {
       navigate(
         selected === 'creator'
