@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ConvexReactClient } from "convex/react";
 import { auth } from "./firebase";
 import { getIdToken } from "firebase/auth";
@@ -12,24 +13,26 @@ const url =
 // whenever it needs a fresh token; Firebase refreshes tokens transparently.
 export const convex = new ConvexReactClient(url);
 
-async function fetchFirebaseToken({
-  forceRefreshToken,
-}: {
-  forceRefreshToken: boolean;
-}): Promise<string | null> {
-  const user = auth.currentUser;
-  if (!user) return null;
-  return getIdToken(user, forceRefreshToken);
-}
+export function useFirebaseConvexAuth(): {
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  fetchAccessToken: (args: { forceRefreshToken: boolean }) => Promise<string | null>;
+} {
+  const [user, setUser] = useState(auth.currentUser);
 
-/**
- * (Re)registers the token provider on the Convex client. MUST be called again
- * whenever Firebase auth state changes: if setAuth's first invocation happens
- * while signed out, fetchToken returns null and the client stays
- * unauthenticated until setAuth is called again — Convex does not poll.
- */
-export function syncConvexAuth(): void {
-  convex.setAuth(fetchFirebaseToken, () => {
-    /* auth result logging handled via server logs */
-  });
+  useEffect(() => {
+    return auth.onAuthStateChanged((nextUser) => {
+      setUser(nextUser);
+    });
+  }, []);
+
+  return {
+    isLoading: user === undefined,
+    isAuthenticated: !!user,
+    fetchAccessToken: async ({ forceRefreshToken }) => {
+      const currentUser = auth.currentUser;
+      if (!currentUser) return null;
+      return getIdToken(currentUser, forceRefreshToken);
+    },
+  };
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ConvexProvider, useMutation, useQuery, useConvexAuth } from 'convex/react';
+import { ConvexProviderWithAuth, useMutation, useQuery, useConvexAuth } from 'convex/react';
 import { auth } from './lib/firebase';
-import { convex, syncConvexAuth } from './lib/convexClient';
+import { convex, useFirebaseConvexAuth } from './lib/convexClient';
 import { useAppStore } from './store/useAppStore';
 import { Role } from './types';
 
@@ -71,12 +71,7 @@ function AuthBridge() {
   const [fbUser, setFbUser] = useState<FirebaseUser | null>(null);
 
   useEffect(() => {
-    // onAuthStateChanged fires on registration AND every login/logout/token
-    // change, so the Convex token provider is re-registered exactly when the
-    // signed-in identity changes. Without this, a setAuth that first resolves
-    // while signed out leaves the Convex client unauthenticated forever.
     return auth.onAuthStateChanged((next) => {
-      syncConvexAuth();
       setFbUser(next);
     });
   }, []);
@@ -147,7 +142,7 @@ function ConvexSyncInner({ uid }: { uid: string }) {
 export default function App() {
   const convexDeployed = import.meta.env.VITE_CONVEX_DEPLOYED === "true";
   return (
-    <ConvexProvider client={convex}>
+    <ConvexProviderWithAuth client={convex} useAuth={useFirebaseConvexAuth}>
       <AuthBridge />
       {convexDeployed && <ConvexSync />}
       <BrowserRouter>
@@ -220,7 +215,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </BrowserRouter>
-    </ConvexProvider>
+    </ConvexProviderWithAuth>
   );
 }
 
