@@ -4,6 +4,8 @@ import { PlayCircle, Mail, ChevronLeft } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { useAppStore } from '../../store/useAppStore';
 import { signUpWithEmail, signInWithEmail } from '../../lib/auth';
+import { auth } from '../../lib/firebase';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 function authErrorMessage(err: unknown): string {
   const code = (err as { code?: string })?.code ?? '';
@@ -20,6 +22,10 @@ function authErrorMessage(err: unknown): string {
       return 'Incorrect email or password.';
     case 'auth/too-many-requests':
       return 'Too many attempts. Please try again later.';
+    case 'auth/operation-not-allowed':
+      return 'This sign-in method is not enabled yet for this project.';
+    case 'auth/unauthorized-domain':
+      return 'This site domain is not authorized in the Firebase console.';
     default:
       return 'Something went wrong. Please try again.';
   }
@@ -57,12 +63,21 @@ export function Login() {
     }
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     setIsLoading(true);
-    setTimeout(() => {
-      login('user');
+    try {
+      const provider = new GoogleAuthProvider();
+      const credential = await signInWithPopup(auth, provider);
+      loginWithFirebase(credential.user);
       navigate('/dashboard');
-    }, 1500);
+    } catch (err) {
+      const code = (err as { code?: string })?.code ?? '';
+      if (code !== 'auth/popup-closed-by-user' && code !== 'auth/cancelled-popup-request') {
+        alert(authErrorMessage(err));
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleCreatorLogin = () => {
