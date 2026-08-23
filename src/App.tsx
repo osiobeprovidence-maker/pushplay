@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ConvexProvider, ConvexReactClient } from 'convex/react';
 
 // Layouts
 import { PublicLayout } from './components/layout/PublicLayout';
@@ -54,9 +55,14 @@ import { AdminReports } from './pages/admin/AdminReports';
 import { AdminSettings } from './pages/admin/AdminSettings';
 
 export default function App() {
+  const convex = new ConvexReactClient(
+    import.meta.env.VITE_CONVEX_URL ??
+      "https://wooden-rooster-817.eu-west-1.convex.site"
+  );
   return (
-    <BrowserRouter>
-      <Routes>
+    <ConvexProvider client={convex}>
+      <BrowserRouter>
+        <Routes>
         {/* Public Routes */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
@@ -124,7 +130,8 @@ export default function App() {
         {/* Catch-all redirect */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </ConvexProvider>
   );
 }
 
