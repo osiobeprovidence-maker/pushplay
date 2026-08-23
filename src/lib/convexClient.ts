@@ -5,7 +5,7 @@ import { getIdToken } from "firebase/auth";
 // The Convex site URL. In production this is set via VITE_CONVEX_URL on Vercel.
 const url =
   import.meta.env.VITE_CONVEX_URL ??
-  "https://wooden-rooster-817.eu-west-1.convex.site";
+  "https://wooden-rooster-817.eu-west-1.convex.cloud";
 
 // Convex attaches the Firebase ID token to every request so it can verify the
 // Firebase identity (see convex.config.ts). Convex calls fetchToken whenever
