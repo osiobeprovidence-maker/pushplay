@@ -87,10 +87,21 @@ function AuthBridge() {
 
 /**
  * Persists the Firebase user into Convex and keeps points/isPro/role in sync.
- * Only rendered once the Convex backend is deployed (VITE_CONVEX_DEPLOYED),
- * so the app never calls functions that don't exist yet.
+ * Only mounted while a real Firebase session exists (and once the Convex
+ * backend is deployed), so anonymous/pre-login Convex calls never happen.
  */
 function ConvexSync() {
+  const [fbUser, setFbUser] = useState<FirebaseUser | null>(null);
+
+  useEffect(() => {
+    return auth.onAuthStateChanged((next) => setFbUser(next));
+  }, []);
+
+  if (!fbUser) return null;
+  return <ConvexSyncInner uid={fbUser.uid} />;
+}
+
+function ConvexSyncInner({ uid }: { uid: string }) {
   const { user, patchUser } = useAppStore();
   const storeUser = useMutation("users/storeUser" as any);
   const profile = useQuery("users/getCurrentUser" as any) as
@@ -106,7 +117,7 @@ function ConvexSync() {
         emailVerified: !!user.emailVerified,
       }).catch(() => {});
     }
-  }, [user?.uid, user?.source, storeUser]);
+  }, [uid, user?.source, storeUser]);
 
   useEffect(() => {
     if (profile && user?.source === "firebase") {
