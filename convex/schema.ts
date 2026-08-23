@@ -12,4 +12,15 @@ export default defineSchema({
     active: v.boolean(),
     createdAt: v.number(),
   }),
+
+  users: defineTable({
+    tokenIdentifier: v.string(),
+    email: v.string(),
+    name: v.optional(v.string()),
+    emailVerified: v.boolean(),
+    role: v.string(),
+    points: v.number(),
+    isPro: v.boolean(),
+    createdAt: v.number(),
+  }).index("by_token", ["tokenIdentifier"]),
 });

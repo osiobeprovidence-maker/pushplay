@@ -11,6 +11,10 @@ export interface User {
   streak: number;
   isPro: boolean;
   joinDate: string;
+  // Firebase-backed fields (optional for demo/mock accounts)
+  uid?: string;
+  emailVerified?: boolean;
+  source?: 'firebase' | 'demo';
 }
 
 export type CampaignType = 'video' | 'music' | 'live' | 'challenge' | 'poll';

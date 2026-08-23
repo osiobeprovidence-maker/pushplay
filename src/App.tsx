@@ -1,5 +1,10 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ConvexProvider, ConvexReactClient } from 'convex/react';
+import { ConvexProvider, useMutation, useQuery } from 'convex/react';
+import { auth } from './lib/firebase';
+import { convex } from './lib/convexClient';
+import { useAppStore } from './store/useAppStore';
+import { Role } from './types';
 
 // Layouts
 import { PublicLayout } from './components/layout/PublicLayout';
@@ -54,13 +59,74 @@ import { AdminWithdrawals } from './pages/admin/AdminWithdrawals';
 import { AdminReports } from './pages/admin/AdminReports';
 import { AdminSettings } from './pages/admin/AdminSettings';
 
+import type { User as FirebaseUser } from 'firebase/auth';
+
+/**
+ * Keeps the app's user state in sync with Firebase. When a real Firebase user
+ * is signed in we push them into the store; when they sign out we clear it.
+ * Demo (mock) accounts are untouched because they have no Firebase session.
+ */
+function AuthBridge() {
+  const { loginWithFirebase, logout, user } = useAppStore();
+  const [fbUser, setFbUser] = useState<FirebaseUser | null>(null);
+
+  useEffect(() => {
+    return auth.onAuthStateChanged((next) => setFbUser(next));
+  }, []);
+
+  useEffect(() => {
+    if (fbUser) {
+      loginWithFirebase(fbUser);
+    } else if (user?.source === 'firebase') {
+      logout();
+    }
+  }, [fbUser, loginWithFirebase, logout, user?.source]);
+
+  return null;
+}
+
+/**
+ * Persists the Firebase user into Convex and keeps points/isPro/role in sync.
+ * Only rendered once the Convex backend is deployed (VITE_CONVEX_DEPLOYED),
+ * so the app never calls functions that don't exist yet.
+ */
+function ConvexSync() {
+  const { user, patchUser } = useAppStore();
+  const storeUser = useMutation("users/storeUser" as any);
+  const profile = useQuery("users/getCurrentUser" as any) as
+    | { points: number; isPro: boolean; role: string }
+    | null
+    | undefined;
+
+  useEffect(() => {
+    if (user?.source === "firebase") {
+      void storeUser({
+        email: user.email,
+        name: user.name,
+        emailVerified: !!user.emailVerified,
+      }).catch(() => {});
+    }
+  }, [user?.uid, user?.source, storeUser]);
+
+  useEffect(() => {
+    if (profile && user?.source === "firebase") {
+      patchUser({
+        points: profile.points,
+        isPro: profile.isPro,
+        role: profile.role as Role,
+      });
+    }
+  }, [profile, user?.source, patchUser]);
+
+  return null;
+}
+
 export default function App() {
-  const convex = new ConvexReactClient(
-    import.meta.env.VITE_CONVEX_URL ??
-      "https://wooden-rooster-817.eu-west-1.convex.site"
-  );
+  const convexDeployed = import.meta.env.VITE_CONVEX_DEPLOYED === "true";
   return (
     <ConvexProvider client={convex}>
+      <AuthBridge />
+      {convexDeployed && <ConvexSync />}
       <BrowserRouter>
         <Routes>
         {/* Public Routes */}

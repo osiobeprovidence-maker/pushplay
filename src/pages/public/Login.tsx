@@ -3,25 +3,58 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { PlayCircle, Mail, ChevronLeft } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { useAppStore } from '../../store/useAppStore';
+import { signUpWithEmail, signInWithEmail } from '../../lib/auth';
+
+function authErrorMessage(err: unknown): string {
+  const code = (err as { code?: string })?.code ?? '';
+  switch (code) {
+    case 'auth/email-already-in-use':
+      return 'This email is already registered. Try signing in instead.';
+    case 'auth/invalid-email':
+      return 'Please enter a valid email address.';
+    case 'auth/weak-password':
+      return 'Password should be at least 6 characters.';
+    case 'auth/user-not-found':
+    case 'auth/wrong-password':
+    case 'auth/invalid-credential':
+      return 'Incorrect email or password.';
+    case 'auth/too-many-requests':
+      return 'Too many attempts. Please try again later.';
+    default:
+      return 'Something went wrong. Please try again.';
+  }
+}
 
 export function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAppStore();
+  const { login, loginWithFirebase } = useAppStore();
   const [isLoading, setIsLoading] = useState(false);
   const [authMethod, setAuthMethod] = useState<'choice' | 'email'>('choice');
-  
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const isSignup = location.pathname === '/signup';
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate network request
-    setTimeout(() => {
-      login('user'); // Login as user mock
+    try {
+      if (isSignup) {
+        const user = await signUpWithEmail(email, password, name);
+        loginWithFirebase(user);
+      } else {
+        const user = await signInWithEmail(email, password);
+        loginWithFirebase(user);
+      }
       navigate('/dashboard');
-    }, 1000);
+    } catch (err) {
+      alert(authErrorMessage(err));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -47,27 +80,27 @@ export function Login() {
       <div className="w-full max-w-md bg-neutral-900 border border-neutral-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
         {/* Decorative background flare */}
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-white/5 blur-[60px] rounded-full pointer-events-none" />
-        
+
         <div className="relative z-10">
           <div className="flex justify-center mb-8">
             <div className="w-16 h-16 bg-neutral-950 rounded-2xl flex items-center justify-center border border-neutral-800 shadow-inner group">
               <PlayCircle className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
             </div>
           </div>
-          
+
           <h2 className="text-2xl font-bold text-center mb-2">
             {isSignup ? 'Create Account' : 'Welcome Back'}
           </h2>
           <p className="text-neutral-400 text-center text-sm mb-10">
-            {isSignup 
-              ? 'Join Push Play and start earning today.' 
+            {isSignup
+              ? 'Join Push Play and start earning today.'
               : 'Enter your details to sign in to your account.'}
           </p>
 
           {authMethod === 'choice' ? (
             <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="w-full gap-3 h-14 border-neutral-700 hover:bg-neutral-800"
                 onClick={handleGoogleLogin}
                 isLoading={isLoading}
@@ -92,9 +125,9 @@ export function Login() {
                 </svg>
                 Continue with Google
               </Button>
-              
-              <Button 
-                variant="secondary" 
+
+              <Button
+                variant="secondary"
                 className="w-full gap-3 h-14 bg-neutral-800 hover:bg-neutral-700"
                 onClick={() => setAuthMethod('email')}
               >
@@ -108,7 +141,7 @@ export function Login() {
             </div>
           ) : (
             <div className="animate-in fade-in slide-in-from-right-4 duration-500">
-              <button 
+              <button
                 onClick={() => setAuthMethod('choice')}
                 className="flex items-center gap-1.5 text-xs font-medium text-neutral-400 hover:text-white mb-6 transition-colors"
               >
@@ -120,8 +153,10 @@ export function Login() {
                 {isSignup && (
                   <div>
                     <label className="block text-sm font-medium text-neutral-300 mb-1.5">Full Name</label>
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       placeholder="Alex Johnson"
                       className="w-full h-12 bg-neutral-950 border border-neutral-800 rounded-xl px-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all"
                       required
@@ -130,8 +165,10 @@ export function Login() {
                 )}
                 <div>
                   <label className="block text-sm font-medium text-neutral-300 mb-1.5">Email</label>
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="alex@example.com"
                     className="w-full h-12 bg-neutral-950 border border-neutral-800 rounded-xl px-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all"
                     required
@@ -142,14 +179,16 @@ export function Login() {
                     <label className="block text-sm font-medium text-neutral-300">Password</label>
                     {!isSignup && <a href="#" className="text-xs text-neutral-400 hover:text-white">Forgot password?</a>}
                   </div>
-                  <input 
-                    type="password" 
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     className="w-full h-12 bg-neutral-950 border border-neutral-800 rounded-xl px-4 text-white placeholder:text-neutral-600 focus:outline-none focus:border-neutral-500 focus:ring-1 focus:ring-neutral-500 transition-all"
                     required
                   />
                 </div>
-                
+
                 <Button type="submit" className="w-full mt-2" isLoading={isLoading}>
                   {isSignup ? 'Create Account' : 'Sign In'}
                 </Button>
@@ -170,7 +209,7 @@ export function Login() {
           </div>
 
           <div className="mt-6 text-center">
-            <button 
+            <button
               onClick={() => navigate(isSignup ? '/login' : '/signup')}
               className="text-sm text-neutral-400 hover:text-white transition-colors"
             >
