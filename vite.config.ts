@@ -2,25 +2,11 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
-import { copyFileSync } from 'fs';
-
-function spaFallbackPlugin() {
-  return {
-    name: 'spa-fallback',
-    closeBundle() {
-      try {
-        copyFileSync('dist/index.html', 'dist/404.html');
-        // eslint-disable-next-line no-console
-        console.log('✓ SPA fallback: copied dist/index.html → dist/404.html for GitHub Pages');
-      } catch {}
-    },
-  };
-}
 
 export default defineConfig(() => {
   return {
     appType: 'spa' as const,
-    plugins: [react(), tailwindcss(), spaFallbackPlugin() as any],
+    plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

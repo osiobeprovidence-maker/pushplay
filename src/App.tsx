@@ -16,6 +16,7 @@ import { AdminLayout } from './components/layout/AdminLayout';
 // Public Pages
 import { Home } from './pages/public/Home';
 import { Login } from './pages/public/Login';
+import { Onboarding } from './pages/public/Onboarding';
 import { DiscoverOverview } from './pages/public/DiscoverOverview';
 import { CreatorsOverview } from './pages/public/CreatorsOverview';
 import { BusinessOverview } from './pages/public/BusinessOverview';
@@ -145,6 +146,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
+          <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/explore" element={<DiscoverOverview />} />
           <Route path="/creators" element={<CreatorsOverview />} />
           <Route path="/for-business" element={<BusinessOverview />} />
