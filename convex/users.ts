@@ -26,6 +26,9 @@ export const storeUser = mutation({
         email: args.email,
         name: args.name ?? existing.name,
         emailVerified: args.emailVerified,
+        // Every main account is a plain user; capabilities are separate
+        // profile rows (see profiles.ts).
+        accountType: "user",
       });
       return existing._id;
     }
@@ -36,6 +39,7 @@ export const storeUser = mutation({
       name: args.name,
       emailVerified: args.emailVerified,
       role: "user",
+      accountType: "user",
       points: 0,
       isPro: false,
       createdAt: now,

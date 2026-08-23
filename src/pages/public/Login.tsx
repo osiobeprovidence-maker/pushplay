@@ -5,7 +5,7 @@ import { Button } from '../../components/ui/Button';
 import { useAppStore } from '../../store/useAppStore';
 import { signUpWithEmail, signInWithEmail } from '../../lib/auth';
 import { auth } from '../../lib/firebase';
-import { GoogleAuthProvider, signInWithPopup, getAdditionalUserInfo } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 function authErrorMessage(err: unknown): string {
   const code = (err as { code?: string })?.code ?? '';
@@ -51,8 +51,8 @@ export function Login() {
       if (isSignup) {
         const user = await signUpWithEmail(email, password, name);
         loginWithFirebase(user);
-        // New users pick what they came for before entering the app.
-        navigate('/onboarding');
+        // Every new signup is a normal Push Play user — straight in.
+        navigate('/dashboard');
       } else {
         const user = await signInWithEmail(email, password);
         loginWithFirebase(user);
@@ -71,9 +71,7 @@ export function Login() {
       const provider = new GoogleAuthProvider();
       const credential = await signInWithPopup(auth, provider);
       loginWithFirebase(credential.user);
-      // First-time Google users go through onboarding too.
-      const info = getAdditionalUserInfo(credential);
-      navigate(info?.isNewUser ? '/onboarding' : '/dashboard');
+      navigate('/dashboard');
     } catch (err) {
       const code = (err as { code?: string })?.code ?? '';
       if (code !== 'auth/popup-closed-by-user' && code !== 'auth/cancelled-popup-request') {

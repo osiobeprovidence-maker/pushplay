@@ -16,7 +16,6 @@ import { AdminLayout } from './components/layout/AdminLayout';
 // Public Pages
 import { Home } from './pages/public/Home';
 import { Login } from './pages/public/Login';
-import { Onboarding } from './pages/public/Onboarding';
 import { DiscoverOverview } from './pages/public/DiscoverOverview';
 import { CreatorsOverview } from './pages/public/CreatorsOverview';
 import { BusinessOverview } from './pages/public/BusinessOverview';
@@ -110,18 +109,18 @@ function ConvexSync() {
 }
 
 function ConvexSyncInner({ uid }: { uid: string }) {
-  const { user, patchUser, markRoleSynced } = useAppStore();
-  const roleDirty = useAppStore((s) => s.roleDirty);
+  const { user, patchUser } = useAppStore();
   const { isAuthenticated } = useConvexAuth();
   const storeUser = useMutation("users/storeUser" as any);
-  const setUserRole = useMutation("users/setUserRole" as any);
   const profile = useQuery("users/getCurrentUser" as any) as
     | { points: number; isPro: boolean; role: string }
     | null
     | undefined;
 
-  // Create/update the Convex profile. Gated on isAuthenticated so the call
-  // never fires before the Firebase JWT has attached to the Convex client.
+  // Create/retrieve the main user account. Gated on isAuthenticated so the
+  // call never fires before the Firebase JWT has attached to Convex.
+  // New accounts are always plain users; creator/business capabilities are
+  // separate profiles (see convex/profiles.ts).
   useEffect(() => {
     if (!isAuthenticated || user?.source !== "firebase") return;
     void storeUser({
@@ -131,32 +130,16 @@ function ConvexSyncInner({ uid }: { uid: string }) {
     }).catch(() => {});
   }, [isAuthenticated, uid, user?.source, user?.email, user?.name, user?.emailVerified, storeUser]);
 
-  // Push a locally-chosen role (onboarding) to the server exactly once.
-  useEffect(() => {
-    if (!roleDirty || !user?.role) return;
-    if (!isAuthenticated || user?.source !== "firebase") return;
-    let cancelled = false;
-    void setUserRole({ role: user.role })
-      .then(() => {
-        if (!cancelled) markRoleSynced();
-      })
-      .catch(() => {});
-    return () => {
-      cancelled = true;
-    };
-  }, [roleDirty, isAuthenticated, user?.source, user?.role, setUserRole, markRoleSynced]);
-
-  // Mirror server-side points/isPro/role into the local store. A pending
-  // local role choice is never clobbered by a stale server snapshot.
+  // Mirror server-side points/isPro into the local store.
   useEffect(() => {
     if (profile && user?.source === "firebase") {
       patchUser({
         points: profile.points,
         isPro: profile.isPro,
-        ...(roleDirty ? {} : { role: profile.role as Role }),
+        role: profile.role as Role,
       });
     }
-  }, [profile, user?.source, roleDirty, patchUser]);
+  }, [profile, user?.source, patchUser]);
 
   return null;
 }
@@ -174,7 +157,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
-          <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/explore" element={<DiscoverOverview />} />
           <Route path="/creators" element={<CreatorsOverview />} />
           <Route path="/for-business" element={<BusinessOverview />} />

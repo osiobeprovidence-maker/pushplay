@@ -3,6 +3,7 @@ import { useAppStore } from '../../store/useAppStore';
 import { Settings, Shield, Bell, HelpCircle, ChevronRight, Copy } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { StreakCard } from '../../components/ui/StreakCard';
+import { Capabilities } from '../../components/account/Capabilities';
 
 export function Profile() {
   const { user } = useAppStore();
@@ -74,6 +75,8 @@ export function Profile() {
             </div>
             <Button variant="secondary">Upgrade</Button>
           </div>
+
+          <Capabilities />
         </div>
 
       </div>
