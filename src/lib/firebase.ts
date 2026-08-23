@@ -16,6 +16,25 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
+
+// Analytics requires a fully-populated config (it pulls in Firebase
+// Installations, which hard-crashes without projectId). Guard it so a missing
+// env var degrades gracefully instead of breaking the whole app.
+export const analytics = (() => {
+  try {
+    if (
+      typeof window === "undefined" ||
+      !firebaseConfig.apiKey ||
+      !firebaseConfig.projectId ||
+      !firebaseConfig.measurementId
+    ) {
+      return null;
+    }
+    return getAnalytics(app);
+  } catch {
+    return null;
+  }
+})();
+
 export const auth = getAuth(app);
 export const db = getFirestore(app);
